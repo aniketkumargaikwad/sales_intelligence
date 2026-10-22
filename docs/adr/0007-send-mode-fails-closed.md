@@ -1,6 +1,6 @@
 # ADR-0007: Send mode fails closed
 
-Status: Proposed. Date: 2026-10-22. Deviates from brief §1.3.
+Status: Accepted (design PR #1 merged 2026-10-22). Date: 2026-10-22. Deviates from brief §1.3.
 
 ## Context
 

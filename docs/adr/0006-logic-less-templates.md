@@ -1,6 +1,6 @@
 # ADR-0006: Logic-less templates shared by engine and dashboard
 
-Status: Proposed. Date: 2026-10-22.
+Status: Accepted (design PR #1 merged 2026-10-22). Date: 2026-10-22.
 
 ## Context
 

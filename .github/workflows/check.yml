@@ -1,0 +1,31 @@
+# Run `si check` with the repository's secrets, to confirm they work from GitHub Actions.
+name: check
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    env:
+      SI_DATABASE_URL: ${{ secrets.SI_DATABASE_URL }}
+      SI_SEND_MODE: ${{ vars.SI_SEND_MODE }}
+      SI_ONLY_TO: ${{ vars.SI_ONLY_TO }}
+      SI_ANTHROPIC_API_KEY: ${{ secrets.SI_ANTHROPIC_API_KEY }}
+      SI_GEMINI_API_KEY: ${{ secrets.SI_GEMINI_API_KEY }}
+      SI_SMTP_HOST: ${{ vars.SI_SMTP_HOST }}
+      SI_SMTP_PORT: ${{ vars.SI_SMTP_PORT || '587' }}
+      SI_SMTP_USER: ${{ vars.SI_SMTP_USER }}
+      SI_SMTP_PASSWORD: ${{ secrets.SI_SMTP_PASSWORD }}
+      SI_IMAP_HOST: ${{ vars.SI_IMAP_HOST }}
+      SI_IMAP_PORT: ${{ vars.SI_IMAP_PORT || '993' }}
+      SI_IMAP_USER: ${{ vars.SI_IMAP_USER }}
+      SI_IMAP_PASSWORD: ${{ secrets.SI_IMAP_PASSWORD }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - run: uv sync --locked --no-dev
+      - run: uv run python -m si check

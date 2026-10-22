@@ -1,6 +1,6 @@
 # sales-intelligence: phased plan
 
-Status: **draft for operator review**. Follows brief §9; design in [`design.md`](design.md).
+Status: **accepted** 2026-10-22. Follows brief §9; design in [`design.md`](design.md).
 Each phase is one or more PRs, ends with tests green and a short demo to the operator, and does not
 start until the previous phase's demo is accepted.
 

@@ -1,6 +1,6 @@
 # sales-intelligence: design
 
-Status: **draft for operator review** (phase 0). No engine code is written until this is approved.
+Status: **accepted** 2026-10-22 (PR #1). The §11 questions were accepted on the defaults in §16.
 Date: 2026-10-22. Source brief: [`docs/brief.md`](brief.md). Decisions: [`docs/adr/`](adr/).
 Build order: [`docs/plan.md`](plan.md).
 

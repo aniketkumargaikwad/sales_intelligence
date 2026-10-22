@@ -1,0 +1,43 @@
+# Example Offer Brief (brief §2). Folders starting with "_" are ignored by the engine.
+# Copy to offers/<your-offer-slug>/offer.yaml, or run /onboard-offer in Claude Code.
+offer:
+  name: Example Studio
+  one_liner: "Fast, accessible websites for independent clinics"
+  type: agency
+  website: https://example.com
+  price: { from: "£1,200 one-off", upfront: "50%", trial: null }  # the ONLY prices copy may state
+  proof: { customers: [], case_studies: [], numbers: [] }        # empty = never claim any
+  differentiators:
+    - "Live in two weeks"
+  objections:
+    - objection: "We already have a website"
+      answer: "We'll send a free audit of the current one first, so you can judge."
+  proof_asset: { adapter: none, description: "none yet" }
+market:
+  geographies:
+    - { country: GB, regions: [England], timezone: Europe/London }
+  segments:
+    - { key: physio_gb, industry: physiotherapy, size: "1-20 staff", languages: English, target_total: 50 }
+  b2b_or_b2c: b2b
+  exclude: []
+icp:
+  must_have: ["has a website older than 3 years"]
+  nice_to_have: ["4.5+ rating", "takes online bookings"]
+  disqualifiers: ["part of a national chain"]
+  signals: []
+channels:
+  allowed: [email, linkedin_manual]
+  forbidden: [cold_call, cold_sms, cold_whatsapp]
+  copy_language: en
+  tone: "plain, helpful, no hype"
+sender:
+  from_name: Sam
+  role: Founder
+  business_phone: null
+  postal_address: "1 Example Street, London, EC1A 1AA, United Kingdom"
+  mailboxes: [sam@example.com]
+constraints:
+  monthly_budget_usd: 50
+  daily_new_prospects: 5
+  approval: required
+  test_mode_only_to: [sam.personal@example.com]
