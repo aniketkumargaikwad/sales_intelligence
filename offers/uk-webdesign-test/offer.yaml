@@ -1,0 +1,63 @@
+# TEST OFFER. A fictional UK web-design studio used to prove the system is not VoiceSync-shaped
+# (plan phase 2 acceptance). Every name, address and mailbox here is made up and uses reserved
+# example domains. It must never be switched to live sending.
+offer:
+  name: Northlight Studio
+  one_liner: "Fast, accessible websites that turn visits into bookings, for independent clinics"
+  type: agency
+  website: https://northlight.example
+  price: { from: "£1,800 per site", upfront: "£900 deposit", trial: null }  # the ONLY prices copy may state
+  proof: { customers: [], case_studies: [], numbers: [] }                    # empty = never claim any
+  differentiators:
+    - "Live in 14 days from the content call"
+    - "Booking-first: every page leads to the clinic's existing booking link"
+    - "Checked against WCAG 2.2 AA before launch"
+  objections:
+    - objection: "We already have a website"
+      answer: "We'll send a one-page audit of the current site first, so you can judge whether it's worth changing."
+    - objection: "We get patients through word of mouth"
+      answer: "Most word-of-mouth patients still look you up before booking; the site is where that referral turns into a booking or doesn't."
+    - objection: "We don't have time for a website project"
+      answer: "One 45-minute content call; we write the copy and you approve it."
+  proof_asset: { adapter: none, description: "planned: one-page audit of the clinic's current site (speed, mobile, accessibility, booking path)" }
+market:
+  geographies:
+    - { country: GB, regions: [England], timezone: Europe/London }
+  segments:
+    - { key: physio_england, industry: physiotherapy clinics, size: "1-15 staff", languages: English, target_total: 50 }
+    - { key: dental_england, industry: independent dental practices, size: "1-20 staff", languages: English, target_total: 50 }
+  b2b_or_b2c: b2b
+  exclude: ["NHS trusts and hospitals", "national clinic and dental groups"]
+icp:
+  must_have:
+    - "independent clinic, not part of a national group"
+    - "has a website we can audit"
+    - "registered as a limited company or LLP (corporate subscriber under PECR)"
+  nice_to_have:
+    - "homepage has no visible booking button"
+    - "site fails Google's mobile performance check"
+    - "4.5+ Google rating with 50+ reviews"
+  disqualifiers:
+    - "site rebuilt in the last 18 months"
+    - "marketing run centrally by a parent group"
+    - "sole trader or partnership (PECR needs prior consent)"
+  signals:
+    - "hiring a practice manager or receptionist"
+    - "opened a new location"
+    - "practice changed owner"
+channels:
+  allowed: [email, linkedin_manual]
+  forbidden: [cold_call, cold_sms, cold_whatsapp]
+  copy_language: en
+  tone: "plain, helpful, specific; a craftsperson, not a salesperson"
+sender:
+  from_name: Sam Taylor
+  role: Founder
+  business_phone: null
+  postal_address: "1 Example Street, London EC1A 1AA, United Kingdom"
+  mailboxes: [sam@northlight.example]
+constraints:
+  monthly_budget_usd: 30
+  daily_new_prospects: 5
+  approval: required
+  test_mode_only_to: [sam.test@northlight.example]

@@ -214,6 +214,16 @@ class OfferConfig(Strict):
     providers: Providers = Providers()
 
 
+def readiness_gaps(config: OfferConfig) -> list[str]:
+    """Things that don't block validation but must be filled in before any real send."""
+    gaps: list[str] = []
+    if "todo" in config.sender.postal_address.lower():
+        gaps.append("sender.postal_address is still a TODO")
+    if not config.constraints.test_mode_only_to:
+        gaps.append("constraints.test_mode_only_to is empty, so test mode delivers nothing")
+    return gaps
+
+
 class LoadedOffer(BaseModel):
     model_config = ConfigDict(frozen=True)
 

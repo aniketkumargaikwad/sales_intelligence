@@ -1,0 +1,20 @@
+name: voicesync-from-brief
+skill: offer-intake
+input: |
+  The operator points at docs/brief.md §1–2 and says: "VoiceSync is an AI receptionist that
+  answers every call 24/7 in Marathi, Hindi and English. ₹2,499 a month, nothing upfront, a
+  14-day pilot. Start with dental clinics in Maharashtra. No customers we can name yet. Never cold
+  call or cold WhatsApp anyone."
+fixture: offers/voicesync
+offer:
+  - {path: offer.price.from, equals: "₹2,499/month"}
+  - {path: offer.price.upfront, equals: "none"}
+  - {path: offer.price.trial, equals: "14-day pilot"}
+  - {path: offer.proof.customers, empty: true}
+  - {path: offer.proof.case_studies, empty: true}
+  - {path: market.geographies.0.country, equals: IN}
+  - {path: market.geographies.0.timezone, equals: Asia/Kolkata}
+  - {path: channels.allowed, not_contains: [cold_call, cold_sms, cold_whatsapp]}
+  - {path: channels.forbidden, contains: [cold_call, cold_whatsapp]}
+  - {path: constraints.approval, equals: required}
+  - {path: channels.copy_language, equals: en}
