@@ -1,0 +1,12 @@
+name: uk-agency-pack
+skill: strategy-pack
+input: |
+  /build-icp uk-webdesign-test, from offers/uk-webdesign-test/offer.yaml and context/.
+fixture: offers/uk-webdesign-test
+strategy:
+  clean: true
+  mentions:
+    icp: ["Companies House", "sole trader", "PECR"]
+    messaging: ["£1,800 per site", "None yet"]
+    channels: ["one-click unsubscribe", "Cold calls, cold SMS and cold WhatsApp"]
+    objections: ["How much is it?"]

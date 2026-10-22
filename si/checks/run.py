@@ -7,7 +7,13 @@ from collections.abc import Awaitable, Callable, Iterable, Sequence
 
 from si.checks.base import CheckResult
 from si.checks.dns import check_domains
-from si.config.offer import LoadedOffer, OfferConfigError, load_offer, offer_dirs
+from si.config.offer import (
+    LoadedOffer,
+    OfferConfigError,
+    load_offer,
+    offer_dirs,
+    readiness_gaps,
+)
 from si.config.settings import Settings
 from si.db import migrate as migrations
 from si.db.connection import DatabaseNotConfigured, connect
@@ -35,6 +41,8 @@ def load_offers(settings: Settings) -> tuple[list[LoadedOffer], list[CheckResult
         else:
             offers.append(offer)
             results.append(CheckResult.ok(f"config: {offer.slug}", "offer.yaml is valid"))
+            for gap in readiness_gaps(offer.config):
+                results.append(CheckResult.info(f"config: {offer.slug}", f"before go-live: {gap}"))
     return offers, results
 
 

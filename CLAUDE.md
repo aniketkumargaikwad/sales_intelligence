@@ -48,6 +48,8 @@ agents explain and operate the engine, they never replace it.
 | `db/migrations/` | Plain SQL, applied in order by `python -m si migrate`; never edit an applied one |
 | `docs/` | Design, plan, ADRs, runbook |
 | `.claude/hooks/` | PreToolUse guards (convenience; real enforcement is in the engine and DB) |
+| `.claude/agents/`, `commands/`, `skills/` | Seats (subagents), slash commands, step-by-step skills |
+| `evals/<skill>/cases/` | Eval cases for LLM-backed skills; run with `python -m si eval` |
 
 ## Commands
 
@@ -56,6 +58,8 @@ uv sync                                  # install
 uv run python -m si check                # every configured piece, with a real minimal call
 uv run python -m si migrate              # apply database migrations
 uv run python -m si validate             # validate every offer.yaml
+uv run python -m si strategy check offers/<slug>   # strategy pack: sections + honesty lint
+uv run python -m si eval evals/<skill>/cases/<case>.yaml offers/<slug>   # skill output vs eval case
 uv run pytest -q                         # tests (DB tests need SI_TEST_DATABASE_URL)
 uv run ruff check . && uv run ruff format --check . && uv run mypy
 ```

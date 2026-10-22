@@ -38,6 +38,10 @@ Phases 2, 4, 9, 10 and 11 add value but don't block the cutover.
   funnel, 30-day plan).
 - Offers: `voicesync` and the second test offer (default: UK web-design agency).
 - **Acceptance**: both offers produce sensible packs the operator signs off; evals for intake/ICP.
+- Built: `si strategy check|hash` (required docs and sections, front matter, honesty lint on
+  prices, percentages, customer claims and sample copy), `si eval` with cases in `evals/`, the
+  `strategist` agent, the UK test offer (`uk-webdesign-test`, fictional) with a clean pack, and a
+  VoiceSync draft that waits on the operator's interview answers.
 
 ## Phase 3: Source → enrich → verify → fit
 

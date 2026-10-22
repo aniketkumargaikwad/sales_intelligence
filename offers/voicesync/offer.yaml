@@ -1,0 +1,43 @@
+# VoiceSync: the first real offer. Drafted 2026-10-22 from docs/brief.md (§1, §2, §8).
+# Items marked TODO are waiting on the operator; see context/open-questions.md.
+offer:
+  name: VoiceSync
+  one_liner: "An AI receptionist that answers every call 24/7 in Marathi, Hindi and English"
+  type: saas
+  website: https://voicesync.in
+  price: { from: "₹2,499/month", upfront: "none", trial: "14-day pilot" }  # the ONLY prices copy may state
+  proof: { customers: [], case_studies: [], numbers: [] }                   # empty = never claim any
+  differentiators:
+    - "Answers every call, 24/7, including after hours and during treatments"
+    - "Speaks Marathi, Hindi and English"
+    - "Each prospect gets a working demo receptionist that already knows their clinic before we reach out"
+  objections: []  # TODO: the operator's most common objections and answers
+  proof_asset: { adapter: voicesync_demo, description: "per-prospect demo receptionist that already knows the clinic's timings, plus a /for/<slug> know-more page" }
+market:
+  geographies:
+    - { country: IN, regions: [Maharashtra], timezone: Asia/Kolkata }
+  segments:
+    - { key: dental_mh, industry: dental clinics, size: "1-20 staff", languages: "Marathi, Hindi or English", target_total: 50 }
+  b2b_or_b2c: b2b
+  exclude: []
+icp:
+  must_have: ["takes phone bookings"]
+  nice_to_have: ["4.3+ rating, 100+ reviews"]
+  disqualifiers: []  # TODO
+  signals: []        # TODO: confirm from the signal library
+channels:
+  allowed: [email, linkedin_manual, whatsapp_manual, visit, call_inbound]
+  forbidden: [cold_call, cold_sms, cold_whatsapp]
+  copy_language: en
+  tone: "confident founder, warm, a little playful, never hype"
+sender:
+  from_name: Aniket
+  role: Founder
+  business_phone: null  # TODO: the one business number (inbound only, never used for cold calls)
+  postal_address: "TODO: postal address for the email footer (required before any send)"
+  mailboxes: [admin@voicesync.in]
+constraints:
+  monthly_budget_usd: 50
+  daily_new_prospects: 5
+  approval: required
+  test_mode_only_to: []  # TODO: the operator's own test inbox

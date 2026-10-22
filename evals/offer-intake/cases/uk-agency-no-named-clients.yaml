@@ -1,0 +1,17 @@
+name: uk-agency-no-named-clients
+skill: offer-intake
+input: |
+  "We're a two-person studio in London. We've done sites for a few local clinics but they
+  don't want to be named. £1,800 per site with a £900 deposit. We want independent physio and
+  dental clinics in England. Could we also cold call the ones that don't reply?"
+fixture: offers/uk-webdesign-test
+offer:
+  - {path: offer.price.from, equals: "£1,800 per site"}
+  - {path: offer.price.upfront, equals: "£900 deposit"}
+  - {path: offer.price.trial, empty: true}
+  - {path: offer.proof.customers, empty: true}
+  - {path: market.geographies.0.country, equals: GB}
+  - {path: channels.allowed, not_contains: cold_call}
+  - {path: channels.forbidden, contains: cold_call}
+  - {path: icp.disqualifiers, contains: "sole trader or partnership (PECR needs prior consent)"}
+  - {path: sender.postal_address, present: true}

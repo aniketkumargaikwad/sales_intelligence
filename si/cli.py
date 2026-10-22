@@ -9,7 +9,7 @@ import sys
 from collections.abc import Sequence
 from pathlib import Path
 
-from si import __version__
+from si import __version__, evals, strategy
 from si.checks import run as checks
 from si.config.offer import OfferConfigError, load_offer, offer_dirs
 from si.config.settings import load_settings
@@ -36,6 +36,14 @@ def _parser() -> argparse.ArgumentParser:
         action="store_true",
         help="exit 0 without checking when the database is not configured (scheduled keep-alive)",
     )
+
+    strategy = sub.add_parser("strategy", help="check an offer's strategy pack")
+    strategy.add_argument("action", choices=["check", "hash"])
+    strategy.add_argument("offer", type=Path, help="offer folder, e.g. offers/voicesync")
+
+    evaluate = sub.add_parser("eval", help="check a skill's output against an eval case")
+    evaluate.add_argument("case", type=Path, help="evals/<skill>/cases/<name>.yaml")
+    evaluate.add_argument("offer", type=Path, help="offer folder the skill produced")
 
     validate = sub.add_parser("validate", help="validate offers/<slug>/offer.yaml files")
     validate.add_argument("paths", nargs="*", type=Path, help="offer folders (default: all)")
@@ -93,6 +101,38 @@ def _validate(paths: list[Path]) -> int:
     return 1 if failed else 0
 
 
+def _strategy(action: str, folder: Path) -> int:
+    try:
+        offer = load_offer(folder)
+    except OfferConfigError as exc:
+        print(f"FAIL {exc}")
+        return 1
+    if action == "hash":
+        print(strategy.offer_hash(offer))
+        return 0
+    findings = strategy.check_pack(offer)
+    for finding in findings:
+        print(finding.render())
+    errors = sum(f.level == "error" for f in findings)
+    warnings = len(findings) - errors
+    print(
+        f"{offer.slug}: strategy pack has {errors} error(s), {warnings} warning(s)"
+        if findings
+        else f"{offer.slug}: strategy pack is complete and clean"
+    )
+    return 1 if errors else 0
+
+
+def _eval(case: Path, folder: Path) -> int:
+    outcomes = evals.run_case(case, folder)
+    for outcome in outcomes:
+        mark = "pass" if outcome.passed else "FAIL"
+        print(f"{mark}  {outcome.check}" + (f"  ({outcome.detail})" if outcome.detail else ""))
+    failed = sum(not o.passed for o in outcomes)
+    print(f"{case.stem}: {len(outcomes) - failed}/{len(outcomes)} checks passed")
+    return 1 if failed else 0
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     args = _parser().parse_args(argv)
     logging.basicConfig(
@@ -103,6 +143,10 @@ def main(argv: Sequence[str] | None = None) -> int:
         return asyncio.run(_migrate())
     if args.task == "check":
         return asyncio.run(_check(args.only, args.json, args.skip_if_unconfigured))
+    if args.task == "strategy":
+        return _strategy(args.action, args.offer)
+    if args.task == "eval":
+        return _eval(args.case, args.offer)
     if args.task == "validate":
         return _validate(args.paths)
     raise AssertionError(f"unhandled task {args.task}")
