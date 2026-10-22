@@ -1,6 +1,6 @@
 # ADR-0004: Dashboard and public endpoints
 
-Status: Proposed (pending operator answer to brief §11 Q2 and Q8). Date: 2026-10-22.
+Status: Accepted (design PR #1 merged 2026-10-22). Date: 2026-10-22.
 
 ## Context
 

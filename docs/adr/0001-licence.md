@@ -1,6 +1,6 @@
 # ADR-0001: Licence
 
-Status: Proposed (pending operator answer to brief §11 Q1). Date: 2026-10-22.
+Status: Accepted (design PR #1 merged 2026-10-22). Date: 2026-10-22.
 
 ## Context
 

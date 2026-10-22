@@ -1,0 +1,23 @@
+# Supabase's free tier pauses after a period of inactivity, which would break unsubscribe
+# links. One database round trip a day keeps it awake (ADR-0002). Skips cleanly until the
+# SI_DATABASE_URL secret exists.
+name: keepalive
+
+on:
+  schedule:
+    - cron: "41 0 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    env:
+      SI_DATABASE_URL: ${{ secrets.SI_DATABASE_URL }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - run: uv sync --locked --no-dev
+      - run: uv run python -m si check --only database --skip-if-unconfigured

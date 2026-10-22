@@ -1,0 +1,27 @@
+# USD per million tokens. Checked against Anthropic's published model table on 2026-10-22.
+# Cache rates follow the standard multipliers (read 0.1x, 5-minute write 1.25x) unless
+# the table gives an exact figure. Update the date when you change a number.
+checked_on: 2026-10-22
+models:
+  claude-opus-5-5:
+    input: 4.00
+    output: 20.00
+    cache_read: 0.20
+    cache_write: 5.00
+  claude-haiku-5-5:
+    input: 0.10
+    output: 0.50
+    cache_read: 0.01
+    cache_write: 0.125
+    long_context:
+      above_input_tokens: 100000
+      input: 0.50
+      output: 2.50
+      cache_read: 0.05
+      cache_write: 0.625
+  # Free tier: no charge, but calls are still counted.
+  gemini-2.5-flash:
+    input: 0
+    output: 0
+    cache_read: 0
+    cache_write: 0

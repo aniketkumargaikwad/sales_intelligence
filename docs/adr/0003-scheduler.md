@@ -1,6 +1,6 @@
 # ADR-0003: Scheduler
 
-Status: Proposed. Date: 2026-10-22.
+Status: Accepted (design PR #1 merged 2026-10-22). Date: 2026-10-22.
 
 ## Context
 
