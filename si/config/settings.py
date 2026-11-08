@@ -16,6 +16,9 @@ class Settings(BaseSettings):
         env_prefix="SI_",
         env_file=".env",
         env_file_encoding="utf-8",
+        # A secret that does not exist reaches GitHub Actions as an empty string; treat it
+        # as unset so "not configured" checks (e.g. the keepalive) behave.
+        env_ignore_empty=True,
         extra="ignore",
     )
 
