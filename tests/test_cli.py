@@ -24,6 +24,15 @@ def test_keepalive_skips_cleanly_without_database(capsys: pytest.CaptureFixture[
     assert "skipping check" in capsys.readouterr().out
 
 
+def test_keepalive_skips_when_the_secret_is_missing_in_actions(
+    monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    # GitHub Actions passes a secret that does not exist as an empty string, not as unset.
+    monkeypatch.setenv("SI_DATABASE_URL", "")
+    assert main(["check", "--only", "database", "--skip-if-unconfigured"]) == 0
+    assert "skipping check" in capsys.readouterr().out
+
+
 def test_migrate_without_database(capsys: pytest.CaptureFixture[str]) -> None:
     assert main(["migrate"]) == 1
     assert "SI_DATABASE_URL" in capsys.readouterr().out
